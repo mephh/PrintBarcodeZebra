@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Printing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -18,19 +19,24 @@ namespace PrintBarcodeZebra
         {
             InitializeComponent();
             checkBox1.Checked = true;
-            zplTBox.Text = @"CT~~CD,~CC^~CT~
+            firstLineTBox.Text = FileOperations.ReadSetting("firstLine");
+            zplTBox.Text = FileOperations.ReadSetting("zplCode");
+            if (zplTBox.Text == "Not Found")
+            {
+                zplTBox.Text = @"CT~~CD,~CC^~CT~
 ^XA~TA000~JSN^LT0^MNW^MTT^PON^PMN^LH0,0^JMA^PR2,2~SD30^JUS^LRN^CI0^XZ
 ^XA
 ^MMT
-^PW244
-^LL0071
+^PW233
+^LL0203
 ^LS0
-^BY20,20^FT213,10^BXI,2,200,0,0,1,~
-^FH\^FDSN^FS
-^FT166,36^A0I,8,14^FH\^FDPAR0^FS
-^FT166,26^A0I,8,14^FH\^FDPAR1^FS
+^FT69,11^BQN,2,3
+^FH\^FDMA,SN^FS
 ^PQ1,0,1,Y^XZ
 ";
+                firstLineTBox.Text = "5";
+                btnSave.PerformClick();
+            }
         }
 
         private void btnPrint_Click(object sender, EventArgs e)
@@ -51,66 +57,27 @@ namespace PrintBarcodeZebra
                 RawPrinterHelper.SendStringToPrinter(tboxPrinter.Text, dataToSend);
                 snBox.Text = "";
                 snBox.Focus();
-                //PrintDialog pd = new PrintDialog();
-                //pd.PrinterSettings = new PrinterSettings();
-                //if (DialogResult.OK == pd.ShowDialog(this))
-                //{
-                //    // Send a printer-specific to the printer.
-                //    RawPrinterHelper.SendStringToPrinter(pd.PrinterSettings.PrinterName, dataToSend);
-                    
-                //    //MessageBox.Show("Data sent to printer.");
-                //    snBox.Clear();
-                //}
-                //else
-                //{
-                //    MessageBox.Show("Data not sent to printer.");
-                //}
             }
-            
         }
 
         private string GetZplData(string serialNumber)
         {
             StringBuilder zpl = new StringBuilder();
-            //zpl.Append(@"CT~~CD,~CC^~CT~
-            //            ^XA~TA000~JSN^LT0^MNW^MTT^PON^PMN^LH0,0^JMA^PR2,2~SD30^JUS^LRN^CI0^XZ
-            //            ^XA
-            //            ^MMT
-            //            ^PW243
-            //            ^LL0070
-            //            ^LS0
-            //            ^FT169,58^BQN,2,2
-            //            ^FH\^FDMA,<PARAM>^FS
-            //            ^FT165,26^A0I,8,14^FH\^FD<PARAM1>^FS
-            //            ^FT165,16^A0I,8,14^FH\^FD<PARAM2>^FS
-            //            ^PQ1,0,1,Y^XZ
-            //            ");
             zpl.Append(zplTBox.Text);
+            int x = Int32.Parse(firstLineTBox.Text);
 
-            string param1 = serialNumber.Substring(0, 10);
-            string param2 = serialNumber.Substring(10);
+            string param1 = serialNumber.Substring(0, x);
+            string param2 = serialNumber.Substring(x);
+            string ipr = GetIpr(serialNumber, filePathTBox.Text);
+            string completeData = serialNumber + ";" + ipr;
 
-            zpl.Replace("SN", serialNumber);
-            zpl.Replace("PAR0", param1);
-            zpl.Replace("PAR1", param2);
-
-            return zpl.ToString();
-        }
-
-
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            HideControls();
-            lblClose.Show();
-        }
-        
-        private void HideControls()
-        {
-            foreach (Control ctrl in panelMain.Controls)
+            zpl.Replace("SN", completeData);
+            if (chBoxForText.Checked)
             {
-                ctrl.Hide();
+                zpl.Replace("PAR0", param1);
+                zpl.Replace("PAR1", param2);
             }
+            return zpl.ToString();
         }
 
         private void lblClose_Click(object sender, EventArgs e)
@@ -189,6 +156,38 @@ namespace PrintBarcodeZebra
         private void zplTBox_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            FileOperations.AddUpdateAppSetting("zplCode", zplTBox.Text);
+            FileOperations.AddUpdateAppSetting("firstLine", firstLineTBox.Text);
+        }
+
+
+        private string GetIpr(string hid, string textFile)
+        {
+            StreamReader file = new StreamReader(textFile);
+            string line;
+            //string[] file = File.ReadAllLines(textFile);
+
+            while ((line = file.ReadLine()) != null)
+            {
+                if (line.Contains(hid))
+                {
+                    return line.Split('\t')[1];
+                }
+            }
+            //foreach (string line in file)
+            //{
+            //    if (line.Contains(hid))
+            //    {
+            //        return line.Split(' ')[1];
+            //    }
+            //}
+            return "";
+
+            //File.ReadAllLines(textFile).TakeWhile(line => line.Contains(hid));
         }
     }
 }
