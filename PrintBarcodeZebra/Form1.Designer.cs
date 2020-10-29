@@ -32,23 +32,23 @@
             this.snBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.panelMain = new System.Windows.Forms.Panel();
             this.lblClose = new System.Windows.Forms.Label();
-            this.tboxPrinter = new System.Windows.Forms.TextBox();
             this.lblPrinter = new System.Windows.Forms.Label();
+            this.tboxPrinter = new System.Windows.Forms.TextBox();
+            this.panelMain = new System.Windows.Forms.Panel();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.panelSettings = new System.Windows.Forms.Panel();
-            this.zplTBox = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
+            this.chBoxForText = new System.Windows.Forms.CheckBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.filePathTBox = new System.Windows.Forms.TextBox();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.label13 = new System.Windows.Forms.Label();
             this.firstLineTBox = new System.Windows.Forms.TextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.filePathTBox = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.chBoxForText = new System.Windows.Forms.CheckBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.zplTBox = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panelMain.SuspendLayout();
             this.tabControl1.SuspendLayout();
@@ -77,7 +77,6 @@
             this.snBox.Name = "snBox";
             this.snBox.Size = new System.Drawing.Size(442, 20);
             this.snBox.TabIndex = 1;
-            this.snBox.TextChanged += new System.EventHandler(this.snBox_TextChanged);
             this.snBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.snBox_KeyDown);
             // 
             // label1
@@ -89,7 +88,6 @@
             this.label1.Size = new System.Drawing.Size(442, 33);
             this.label1.TabIndex = 2;
             this.label1.Text = "Zeskanuj numer seryjny produktu";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // panel1
             // 
@@ -102,21 +100,7 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(467, 30);
             this.panel1.TabIndex = 3;
-            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
             this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
-            // 
-            // panelMain
-            // 
-            this.panelMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
-            this.panelMain.Controls.Add(this.label1);
-            this.panelMain.Controls.Add(this.snBox);
-            this.panelMain.Controls.Add(this.btnPrint);
-            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelMain.Location = new System.Drawing.Point(3, 3);
-            this.panelMain.Name = "panelMain";
-            this.panelMain.Size = new System.Drawing.Size(453, 248);
-            this.panelMain.TabIndex = 4;
-            this.panelMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelMain_MouseDown);
             // 
             // lblClose
             // 
@@ -130,13 +114,6 @@
             this.lblClose.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblClose.Click += new System.EventHandler(this.lblClose_Click);
             // 
-            // tboxPrinter
-            // 
-            this.tboxPrinter.Location = new System.Drawing.Point(87, 7);
-            this.tboxPrinter.Name = "tboxPrinter";
-            this.tboxPrinter.Size = new System.Drawing.Size(178, 20);
-            this.tboxPrinter.TabIndex = 1;
-            // 
             // lblPrinter
             // 
             this.lblPrinter.AutoSize = true;
@@ -145,6 +122,26 @@
             this.lblPrinter.Size = new System.Drawing.Size(81, 13);
             this.lblPrinter.TabIndex = 2;
             this.lblPrinter.Text = "Nazwa drukarki";
+            // 
+            // tboxPrinter
+            // 
+            this.tboxPrinter.Location = new System.Drawing.Point(87, 7);
+            this.tboxPrinter.Name = "tboxPrinter";
+            this.tboxPrinter.Size = new System.Drawing.Size(178, 20);
+            this.tboxPrinter.TabIndex = 1;
+            // 
+            // panelMain
+            // 
+            this.panelMain.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(230)))), ((int)(((byte)(233)))));
+            this.panelMain.Controls.Add(this.label1);
+            this.panelMain.Controls.Add(this.snBox);
+            this.panelMain.Controls.Add(this.btnPrint);
+            this.panelMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panelMain.Location = new System.Drawing.Point(3, 3);
+            this.panelMain.Name = "panelMain";
+            this.panelMain.Size = new System.Drawing.Size(453, 248);
+            this.panelMain.TabIndex = 4;
+            this.panelMain.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelMain_MouseDown);
             // 
             // tabControl1
             // 
@@ -197,52 +194,32 @@
             this.panelSettings.Name = "panelSettings";
             this.panelSettings.Size = new System.Drawing.Size(453, 248);
             this.panelSettings.TabIndex = 0;
-            this.panelSettings.Paint += new System.Windows.Forms.PaintEventHandler(this.panelSettings_Paint);
             this.panelSettings.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panelSettings_MouseDown);
             // 
-            // zplTBox
+            // chBoxForText
             // 
-            this.zplTBox.Location = new System.Drawing.Point(5, 20);
-            this.zplTBox.Multiline = true;
-            this.zplTBox.Name = "zplTBox";
-            this.zplTBox.Size = new System.Drawing.Size(433, 174);
-            this.zplTBox.TabIndex = 4;
-            this.zplTBox.TextChanged += new System.EventHandler(this.zplTBox_TextChanged);
+            this.chBoxForText.AutoSize = true;
+            this.chBoxForText.Location = new System.Drawing.Point(282, 192);
+            this.chBoxForText.Name = "chBoxForText";
+            this.chBoxForText.Size = new System.Drawing.Size(15, 14);
+            this.chBoxForText.TabIndex = 24;
+            this.chBoxForText.UseVisualStyleBackColor = true;
             // 
-            // label11
+            // label2
             // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(6, 1);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(49, 13);
-            this.label11.TabIndex = 15;
-            this.label11.Text = "Kod ZPL";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(125, 200);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(151, 13);
+            this.label2.TabIndex = 23;
+            this.label2.Text = "Ścieżka do pliku txt z hid/ipr-id";
             // 
-            // label13
+            // filePathTBox
             // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(292, 200);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(111, 13);
-            this.label13.TabIndex = 17;
-            this.label13.Text = "Długość pierwszej linii";
-            // 
-            // firstLineTBox
-            // 
-            this.firstLineTBox.Location = new System.Drawing.Point(409, 197);
-            this.firstLineTBox.Name = "firstLineTBox";
-            this.firstLineTBox.Size = new System.Drawing.Size(29, 20);
-            this.firstLineTBox.TabIndex = 16;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(61, 0);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 20;
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.filePathTBox.Location = new System.Drawing.Point(128, 216);
+            this.filePathTBox.Name = "filePathTBox";
+            this.filePathTBox.Size = new System.Drawing.Size(313, 20);
+            this.filePathTBox.TabIndex = 22;
             // 
             // btnSave
             // 
@@ -254,30 +231,48 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // filePathTBox
+            // checkBox1
             // 
-            this.filePathTBox.Location = new System.Drawing.Point(125, 223);
-            this.filePathTBox.Name = "filePathTBox";
-            this.filePathTBox.Size = new System.Drawing.Size(313, 20);
-            this.filePathTBox.TabIndex = 22;
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Location = new System.Drawing.Point(61, 0);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(15, 14);
+            this.checkBox1.TabIndex = 20;
+            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
-            // label2
+            // label13
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(122, 207);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(151, 13);
-            this.label2.TabIndex = 23;
-            this.label2.Text = "Ścieżka do pliku txt z hid/ipr-id";
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(295, 193);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(111, 13);
+            this.label13.TabIndex = 17;
+            this.label13.Text = "Długość pierwszej linii";
             // 
-            // chBoxForText
+            // firstLineTBox
             // 
-            this.chBoxForText.AutoSize = true;
-            this.chBoxForText.Location = new System.Drawing.Point(177, 1);
-            this.chBoxForText.Name = "chBoxForText";
-            this.chBoxForText.Size = new System.Drawing.Size(15, 14);
-            this.chBoxForText.TabIndex = 24;
-            this.chBoxForText.UseVisualStyleBackColor = true;
+            this.firstLineTBox.Location = new System.Drawing.Point(412, 190);
+            this.firstLineTBox.Name = "firstLineTBox";
+            this.firstLineTBox.Size = new System.Drawing.Size(29, 20);
+            this.firstLineTBox.TabIndex = 16;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(6, 1);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(49, 13);
+            this.label11.TabIndex = 15;
+            this.label11.Text = "Kod ZPL";
+            // 
+            // zplTBox
+            // 
+            this.zplTBox.Location = new System.Drawing.Point(5, 20);
+            this.zplTBox.Multiline = true;
+            this.zplTBox.Name = "zplTBox";
+            this.zplTBox.Size = new System.Drawing.Size(436, 166);
+            this.zplTBox.TabIndex = 4;
             // 
             // Form1
             // 
@@ -290,7 +285,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "Drukowanie etykiet";
-            this.Load += new System.EventHandler(this.Form1_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panelMain.ResumeLayout(false);
